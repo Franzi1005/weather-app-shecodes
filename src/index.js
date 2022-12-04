@@ -56,6 +56,11 @@ function changeTemperature(response) {
   let weatherCond = document.querySelector("#weather-condition");
   let text = response.data.weather[0].description;
   weatherCond.innerHTML = `${text}`;
+  let weatherElement = document.querySelector("#weather-icon");
+  weatherElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function changeCity(city) {
