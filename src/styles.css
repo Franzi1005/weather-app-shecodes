@@ -35,6 +35,10 @@ h5 {
   font-size: 26px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   margin: 34px;
   background: linear-gradient(
@@ -71,4 +75,13 @@ h5 {
 
 .my-info {
   text-align: center;
+}
+
+.highlighted-link {
+  text-decoration: none;
+  color: #e4f1fe;
+}
+
+.highlighted-link:hover {
+  color: #e4f1fe;
 }

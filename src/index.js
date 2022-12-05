@@ -51,7 +51,8 @@ function changeTemperature(response) {
   let newCity = response.data.name;
   heading.innerHTML = `${newCity}`;
   let temperature = document.querySelector("#temperature");
-  let actualTemp = Math.round(response.data.main.temp);
+  realTemperature = response.data.main.temp;
+  let actualTemp = Math.round(realTemperature);
   temperature.innerHTML = actualTemp;
   let weatherCond = document.querySelector("#weather-condition");
   let text = response.data.weather[0].description;
@@ -97,3 +98,27 @@ function showLocalPosition() {
 let currentLocBtn = document.querySelector("#current-location");
 
 currentLocBtn.addEventListener("click", showLocalPosition);
+
+let fahrenheitLink = document.querySelector("#fahrenheit");
+let celsiusLink = document.querySelector("#celsius");
+let temperatureElement = document.querySelector("#temperature");
+
+let realTemperature = null;
+
+function showFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (realTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+  celsiusLink.classList.remove("highlighted-link");
+  fahrenheitLink.classList.add("highlighted-link");
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  temperatureElement.innerHTML = Math.round(realTemperature);
+  fahrenheitLink.classList.remove("highlighted-link");
+  celsiusLink.classList.add("highlighted-link");
+}
+
+fahrenheitLink.addEventListener("click", showFahrenheit);
+celsiusLink.addEventListener("click", showCelsius);
