@@ -81,26 +81,13 @@ changeCity("New York");
 
 // challenge 3
 
-function getTempAndCity(response) {
-  let temperature = document.querySelector("#temperature");
-  let actualTemp = Math.round(response.data.main.temp);
-  temperature.innerHTML = actualTemp;
-  let heading = document.querySelector("h1");
-  let cityName = response.data.name;
-  heading.innerHTML = cityName;
-  let weatherCond = document.querySelector("#weather-condition");
-  let text = response.data.weather[0].description;
-  weatherCond.innerHTML = `${text}`;
-  temperature.innerHTML = actualTemp;
-}
-
 function showPosition(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
   let apiKey = "8a869017a9bbe9c440c0fea9e1fa0af6";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
-  axios.get(apiUrl).then(getTempAndCity);
+  axios.get(apiUrl).then(changeTemperature);
 }
 
 function showLocalPosition() {
