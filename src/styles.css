@@ -84,4 +84,5 @@ a {
 
 .highlighted-link:hover {
   color: #e4f1fe;
+  cursor: default;
 }
