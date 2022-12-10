@@ -46,6 +46,33 @@ completeDate.innerHTML = `${weekday}, ${month} ${date} ${year}, ${hours}:${minut
 let searchForm = document.querySelector("#city-input");
 let cityInput = document.querySelector("#city-input-field");
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+  ];
+  let forecastDay = "";
+  days.forEach(function (day) {
+    forecastDay =
+      forecastDay +
+      `<div class="col-2">
+          <div class="card weather-card">
+            <div class="card-body weather-card-body">
+              <h5 class="card-title">${day}</h5>
+              <p class="card-text temperature">🔆<br />9°/20°</p>
+            </div>
+          </div>
+        </div>`;
+  });
+
+  forecastElement.innerHTML = forecastDay;
+}
+
 function changeTemperature(response) {
   let heading = document.querySelector("h1");
   let newCity = response.data.name;
@@ -79,6 +106,7 @@ function handleSubmit(event) {
 searchForm.addEventListener("submit", handleSubmit);
 
 changeCity("New York");
+displayForecast();
 
 // challenge 3
 

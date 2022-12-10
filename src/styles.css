@@ -50,10 +50,6 @@ a {
   border-radius: 10px;
 }
 
-.weather-card {
-  width: 190px;
-}
-
 .weather-card-body {
   background-color: #e4f1fe;
   text-align: center;
