@@ -73,6 +73,17 @@ function displayForecast() {
   forecastElement.innerHTML = forecastDay;
 }
 
+function getForecast(response) {
+  console.log(response.data.coord);
+  let lon = response.data.coord.lon;
+  let lat = response.data.coord.lat;
+  let apiKey = "8a869017a9bbe9c440c0fea9e1fa0af6";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+//getForecast();
+
 function changeTemperature(response) {
   let heading = document.querySelector("h1");
   let newCity = response.data.name;
@@ -89,6 +100,8 @@ function changeTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
+  getForecast(response);
 }
 
 function changeCity(city) {
@@ -102,11 +115,6 @@ function handleSubmit(event) {
   let city = document.querySelector("#city-input-field").value;
   changeCity(city);
 }
-
-searchForm.addEventListener("submit", handleSubmit);
-
-changeCity("New York");
-displayForecast();
 
 // challenge 3
 
@@ -124,8 +132,6 @@ function showLocalPosition() {
 }
 
 let currentLocBtn = document.querySelector("#current-location");
-
-currentLocBtn.addEventListener("click", showLocalPosition);
 
 let fahrenheitLink = document.querySelector("#fahrenheit");
 let celsiusLink = document.querySelector("#celsius");
@@ -148,5 +154,10 @@ function showCelsius(event) {
   celsiusLink.classList.add("highlighted-link");
 }
 
+searchForm.addEventListener("submit", handleSubmit);
+currentLocBtn.addEventListener("click", showLocalPosition);
 fahrenheitLink.addEventListener("click", showFahrenheit);
 celsiusLink.addEventListener("click", showCelsius);
+
+changeCity("New York");
+displayForecast();
