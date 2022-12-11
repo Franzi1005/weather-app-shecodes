@@ -41,8 +41,6 @@ let completeDate = document.querySelector("small");
 
 completeDate.innerHTML = `${weekday}, ${month} ${date} ${year}, ${hours}:${minutes}`;
 
-// challenge 2
-
 let searchForm = document.querySelector("#city-input");
 let cityInput = document.querySelector("#city-input-field");
 
@@ -64,7 +62,6 @@ function formatDay(timestamp) {
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecast = response.data.daily;
-  console.log(forecast);
 
   let forecastDay = "";
   forecast.forEach(function (day, index) {
@@ -78,10 +75,10 @@ function displayForecast(response) {
               <img src = "http://openweathermap.org/img/wn/${
                 day.weather[0].icon
               }@2x.png" width= "50" />
-             <p class="card-text temperature">${Math.round(
+             <p class="card-text temperature"><span>${Math.round(
                day.temp.min
-             )}°/${Math.round(day.temp.max)}°C</p>
-              </div>
+             )}</span>° / <span>${Math.round(day.temp.max)}</span>°</p>
+            </div>
           </div>
         </div>`;
     }
@@ -130,8 +127,6 @@ function handleSubmit(event) {
   changeCity(city);
 }
 
-// challenge 3
-
 function showPosition(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
@@ -147,31 +142,11 @@ function showLocalPosition() {
 
 let currentLocBtn = document.querySelector("#current-location");
 
-let fahrenheitLink = document.querySelector("#fahrenheit");
-let celsiusLink = document.querySelector("#celsius");
 let temperatureElement = document.querySelector("#temperature");
 
 let realTemperature = null;
 
-function showFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitTemp = (realTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
-  celsiusLink.classList.remove("highlighted-link");
-  fahrenheitLink.classList.add("highlighted-link");
-}
-
-function showCelsius(event) {
-  event.preventDefault();
-  temperatureElement.innerHTML = Math.round(realTemperature);
-  fahrenheitLink.classList.remove("highlighted-link");
-  celsiusLink.classList.add("highlighted-link");
-}
-
 searchForm.addEventListener("submit", handleSubmit);
 currentLocBtn.addEventListener("click", showLocalPosition);
-fahrenheitLink.addEventListener("click", showFahrenheit);
-celsiusLink.addEventListener("click", showCelsius);
 
 changeCity("New York");
-//displayForecast();
